@@ -1,61 +1,72 @@
-# 📑 Public Contract Tracker — Gestão de Ciclo de Vida & Pipeline de Renovação de Contratos Públicos
+# Public Contract Tracker: Temporal Trajectory Analysis and Commercial Renewal Forecasting
 
-Sistema de inteligência comercial e gestão tática de **Contratos Públicos e Atas de Registro de Preços (ARP)** vigentes no Brasil, extraindo dados do PNCP (Portal Nacional de Contratações Públicas) e diários oficiais para **prever janelas de prorrogação e alertar equipes de vendas com antecedência estratégica**.
-
----
-
-## 📌 Que Problema Resolve?
-
-No setor de compras governamentais (Lei 14.133/2021 e Lei 8.666/1993), contratos de serviços contínuos possuem vigência de 12 a 60 meses. O momento ideal para uma empresa concorrente apresentar prova de conceito (PoC) ou demonstrar novas soluções para o órgão licitante é **entre 6 e 9 meses antes do término do contrato atual**, antes da publicação do novo edital.
-
-Empresas perdem negócios porque só descobrem a nova licitação quando o edital é publicado, tendo apenas 15 dias úteis para responder.
-
-O **Public Contract Tracker** resolve isso transformando o acervo de contratos públicos em um **pipeline comercial proativo de ataque**:
-1. Monitora o cronômetro regressivo de vigência de cada contrato.
-2. Identifica contratos que já atingiram o limite máximo legal de renovação (obrigando nova licitação).
-3. Organiza os certames em um painel Kanban comercial com notas de acompanhamento técnico.
+**Author:** Henri Mafra  
+**License:** MIT License  
+**Domain:** Lifecycle Management, Procurement Analytics, Predictive Business Development  
 
 ---
 
-## ⚙️ Diferencial Técnico
+## 1. Overview
 
-- **Heurística de Previsão de Renovação:**
-  Classifica contratos em status de risco:
-  - 🟢 *Vigente Confortável* (> 180 dias de vigência).
-  - 🟡 *Janela de Ataque Pré-Edital* (90 a 180 dias restantes).
-  - 🔴 *Crítico / Licitação Iminente* (< 90 dias restantes).
-- **Filtros Paramétricos por Órgão, UF e Valor:**
-  Capacidade de ordenar contratos por volume financeiro total (R$) ou saldo remanescente empenhado.
+Public Contract Tracker is an analytical management system designed to monitor the complete lifecycle of government contracts and Price Registration Minutes (Atas de Registro de Preços - ARP). By analyzing statutory renewal limitations under Brazilian Public Bidding Laws (Federal Laws 14.133/2021 and 8.666/1993), the platform forecasts pre-tender commercial engagement windows, enabling technical teams to position competitive solutions before notices are published.
 
 ---
 
-## 🏗️ Stack Tecnológica
+## 2. Mathematical Modeling of Renewal Trajectories
 
-- **Framework:** Next.js 14 (App Router), TypeScript, Tailwind CSS.
-- **Banco de Dados:** Supabase / PostgreSQL com índices otimizados para busca textual e filtros por data.
-- **Deploy:** Vercel ou Cloudflare Pages (OpenNext).
+Let contract $C_k$ possess an initial effective execution date $t_{\text{start}}$, an active duration $\Delta t_{\text{curr}}$, and a statutory maximum duration $T_{\max} \in \{60, 120\}\text{ months}$.
+
+The remaining valid execution time $\tau(C_k, t)$ at evaluation date $t$ is:
+
+$$\tau(C_k, t) = (t_{\text{start}} + \Delta t_{\text{curr}}) - t$$
+
+The remaining legal extension ceiling $\Omega(C_k, t)$ is defined as:
+
+$$\Omega(C_k, t) = (t_{\text{start}} + T_{\max}) - t$$
+
+### Status Classification Function:
+$$Status(C_k, t) = \begin{cases}
+\text{CRITICAL\_IMMINENT}, & \text{if } \tau(C_k, t) \le 90\text{ days} \land \Omega(C_k, t) \le 90\text{ days} \\
+\text{TACTICAL\_ENGAGEMENT}, & \text{if } 90\text{ days} < \tau(C_k, t) \le 180\text{ days} \\
+\text{ACTIVE\_COMPLIANT}, & \text{if } \tau(C_k, t) > 180\text{ days}
+\end{cases}$$
 
 ---
 
-## 🚀 Como Executar Localmente
+## 3. Architecture and Data Model
+
+- **Full-Stack Tier:** Next.js 14 (App Router), TypeScript, Tailwind CSS.
+- **Data Engine:** Supabase PostgreSQL with B-tree indices on temporal bounds (`end_date`, `start_date`).
+- **Pipeline Interface:** Interactive Kanban board tracking engagement stages (Pre-Tender PoC, RFI Response, Draft Notice Review).
+
+---
+
+## 4. Setup and Execution
 
 ```bash
-# 1. Clone o repositório
+# 1. Clone repository
 git clone https://github.com/HenriMafra/public-contract-tracker.git
 cd public-contract-tracker
 
-# 2. Instale as dependências
+# 2. Install dependencies
 npm install
 
-# 3. Configure as variáveis de ambiente
+# 3. Configure environment
 cp .env.example .env.local
 
-# 4. Inicie o servidor
+# 4. Start local development server
 npm run dev
 ```
 
 ---
 
-## 📄 Licença
+## 5. References
 
-Distribuído sob a licença **MIT**. Desenvolvido por **Henri Mafra**.
+- Federative Republic of Brazil. (2021). *Federal Law n. 14.133 (Public Bidding and Administrative Contracts Framework)*.
+- Thai, K. V. (2001). Public procurement re-examined. *Journal of Public Procurement*, 1(1), 9-50.
+
+---
+
+## 6. License
+
+Licensed under the MIT License. Copyright (c) Henri Mafra.
