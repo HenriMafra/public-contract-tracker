@@ -1,0 +1,33 @@
+{
+  // MAPPER Contratos — repositório de REFERÊNCIA extraído do monorepo atlas-b2g-online para o
+  // time de desenvolvimento trabalhar. Este Worker ("mapper-contratos-standalone") é uma cópia
+  // isolada para desenvolvimento/testes — o deploy de PRODUÇÃO real deste produto continua sendo
+  // o Worker "mapper-full", publicado a partir do repositório original atlas-b2g-online. Este
+  // repo NÃO substitui aquele deploy agora; ele existe para o time evoluir o produto com uma
+  // base de código limpa, sem o módulo RO (que é outro produto, outro repo, outro banco).
+  // Deploy (quando este repo virar a fonte oficial): npx opennextjs-cloudflare build && npx opennextjs-cloudflare deploy -c wrangler.jsonc
+  // SEGREDOS (SUPABASE_SERVICE_ROLE_KEY, DATABASE_URL) NÃO ficam aqui — use `npx wrangler secret put <NOME> --name <worker>`.
+  // NEXT_PUBLIC_* são embutidos no build (vêm do .env.local em `next build`).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mapper-contratos-standalone",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Smart Placement: diagnosticado 2026-06-30 no repo original — todo fetch do Worker para o
+  // Supabase em sa-east-1 travava ~20s e voltava erro 522 (roteamento Cloudflare↔AWS sa-east-1
+  // degradado). Smart Placement deixa a Cloudflare escolher onde rodar o Worker com base em onde
+  // estão os backends que ele chama. O projeto FULL já roda em us-east-2, mas manter o modo
+  // "smart" é uma proteção adicional.
+  "placement": { "mode": "smart" },
+  "vars": {
+    // não-secretos apenas
+    "ATLAS_DEFAULT_TAG": "PRODUCAO"
+  }
+}

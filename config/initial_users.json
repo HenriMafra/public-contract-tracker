@@ -1,0 +1,7 @@
+[
+  { "email": "henri.afly@gmail.com",     "role": "Administrador",            "nome": "Administrador", "password_env": "ATLAS_ADMIN_PASSWORD" },
+  { "email": "operador@empresa.com",     "role": "Operador de Inteligência", "nome": "Operador",      "password_env": "ATLAS_OPERADOR_PASSWORD" },
+  { "email": "coordenador@empresa.com",  "role": "Coordenador Comercial",    "nome": "Coordenador",   "password_env": "ATLAS_COORDENADOR_PASSWORD" },
+  { "email": "vendedor@empresa.com",     "role": "Vendedor",                 "nome": "Vendedor DF",   "uf": "DF", "vendedor_nome": "Vendedor DF", "password_env": "ATLAS_VENDEDOR_PASSWORD" },
+  { "email": "diretoria@empresa.com",    "role": "Diretoria",                "nome": "Diretoria",     "password_env": "ATLAS_DIRETORIA_PASSWORD" }
+]

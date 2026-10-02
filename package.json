@@ -1,0 +1,44 @@
+{
+  "name": "mapper-contratos",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "create-admin": "tsx scripts/create_admin_user.ts",
+    "sync-outputs": "tsx scripts/sync_pipeline_outputs.ts",
+    "doctor": "node scripts/doctor.mjs",
+    "apply-sql": "python scripts/apply_supabase_sql.py",
+    "build:cf": "node scripts/build-cf.mjs",
+    "preview:cf": "opennextjs-cloudflare preview",
+    "deploy:cf": "node scripts/deploy-cf.mjs",
+    "deploy:cf:raw": "opennextjs-cloudflare deploy"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.45.4",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.451.0",
+    "next": "^14.2.35",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.0.227",
+    "postgres": "^3.4.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "^1.15.0",
+    "@types/node": "^20.16.11",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.95.0"
+  }
+}

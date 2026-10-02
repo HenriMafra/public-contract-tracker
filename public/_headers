@@ -1,0 +1,11 @@
+# Cache dos arquivos estáticos do Next (nome tem hash → trocam sozinhos a cada build).
+# Cache "imutável" por 1 ano: o navegador não revalida toda vez = site mais rápido.
+# (O HTML continua "no-store" pelo middleware, então atualizações aparecem na hora.)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/_next/image*
+  Cache-Control: public, max-age=86400

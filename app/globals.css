@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 247 248 250;        /* off-white suave */
+  --surface: 255 255 255;
+  --surface-2: 241 244 248;
+  --line: 226 230 237;
+  --fg: 15 23 42;           /* slate-900 (mais escuro e nítido) */
+  --muted: 71 85 105;       /* slate-600 (mais contraste no claro) */
+  --brand: 79 70 229;       /* indigo-600 */
+  --brand-600: 67 56 202;   /* indigo-700 */
+  color-scheme: light;
+}
+.dark {
+  --bg: 11 15 25;           /* #0B0F19 — escuro, porém não preto puro */
+  --surface: 18 24 38;      /* #121826 */
+  --surface-2: 30 38 56;    /* #1E2638 */
+  --line: 49 60 82;         /* contraste de borda visível */
+  --fg: 248 250 252;        /* slate-50 (mais claro/branco para leitura fácil) */
+  --muted: 148 163 184;     /* slate-400 */
+  --brand: 129 140 248;     /* indigo-400 */
+  --brand-600: 99 102 241;  /* indigo-500 */
+  color-scheme: dark;
+}
+
+html, body { padding: 0; margin: 0; }
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-sans), ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: rgb(var(--brand) / 0.25); }
+.dark ::-webkit-scrollbar { width: 10px; height: 10px; }
+.dark ::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 8px; }
+.dark ::-webkit-scrollbar-track { background: transparent; }
+
+/* Seções minimizáveis (<details>): some o triângulo nativo e gira a setinha .chev */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+.chev { transition: transform .2s ease; }
+details[open] > summary .chev { transform: rotate(180deg); }
+
+/* === TEMAS DE COR (só o acento muda; os neutros ficam sóbrios) === */
+:root[data-theme="indigo"]{--brand:79 70 229;--brand-600:67 56 202} .dark[data-theme="indigo"]{--brand:129 140 248;--brand-600:99 102 241}
+/* ENTERPRISECORE — tema institucional completo (verde de marca + navy/charcoal do site). Mantém leitura. */
+:root[data-theme="enterprisecore"]{--brand:124 172 63;--brand-600:104 143 52;--surface-2:235 242 228;--line:214 226 205}
+.dark[data-theme="enterprisecore"]{--bg:15 29 43;--surface:25 42 61;--surface-2:36 54 76;--line:51 69 92;--fg:230 237 243;--muted:158 178 196;--brand:143 191 82;--brand-600:124 172 63}
+:root[data-theme="azul"]{--brand:37 99 235;--brand-600:29 78 216} .dark[data-theme="azul"]{--brand:96 165 250;--brand-600:59 130 246}
+:root[data-theme="teal"]{--brand:13 148 136;--brand-600:15 118 110} .dark[data-theme="teal"]{--brand:45 212 191;--brand-600:20 184 166}
+:root[data-theme="floresta"]{--brand:22 163 74;--brand-600:21 128 61} .dark[data-theme="floresta"]{--brand:74 222 128;--brand-600:34 197 94}
+:root[data-theme="esmeralda"]{--brand:16 185 129;--brand-600:5 150 105} .dark[data-theme="esmeralda"]{--brand:52 211 153;--brand-600:16 185 129}
+:root[data-theme="ciano"]{--brand:8 145 178;--brand-600:14 116 144} .dark[data-theme="ciano"]{--brand:34 211 238;--brand-600:6 182 212}
+:root[data-theme="roxo"]{--brand:147 51 234;--brand-600:126 34 206} .dark[data-theme="roxo"]{--brand:192 132 252;--brand-600:168 85 247}
+:root[data-theme="violeta"]{--brand:124 58 237;--brand-600:109 40 217} .dark[data-theme="violeta"]{--brand:167 139 250;--brand-600:139 92 246}
+:root[data-theme="rosa"]{--brand:219 39 119;--brand-600:190 24 93} .dark[data-theme="rosa"]{--brand:244 114 182;--brand-600:236 72 153}
+:root[data-theme="vermelho"]{--brand:220 38 38;--brand-600:185 28 28} .dark[data-theme="vermelho"]{--brand:248 113 113;--brand-600:239 68 68}
+:root[data-theme="laranja"]{--brand:234 88 12;--brand-600:194 65 12} .dark[data-theme="laranja"]{--brand:251 146 60;--brand-600:249 115 22}
+:root[data-theme="ambar"]{--brand:217 119 6;--brand-600:180 83 9} .dark[data-theme="ambar"]{--brand:251 191 36;--brand-600:245 158 11}
+:root[data-theme="grafite"]{--brand:71 85 105;--brand-600:51 65 85} .dark[data-theme="grafite"]{--brand:148 163 184;--brand-600:100 116 139}
+/* === FIM TEMAS === */

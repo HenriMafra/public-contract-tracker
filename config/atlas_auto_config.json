@@ -1,0 +1,57 @@
+{
+  "project": {
+    "name": "ATLAS B2G",
+    "environment": "production",
+    "timezone": "America/Sao_Paulo"
+  },
+  "automation": {
+    "install_dependencies": true,
+    "install_clis": true,
+    "create_python_venv": true,
+    "run_node_install": true,
+    "run_build": true,
+    "apply_sql": true,
+    "create_admin": true,
+    "load_initial_data": true,
+    "validate_rls": true,
+    "validate_frontend": true,
+    "create_scheduler": true,
+    "generate_report": true
+  },
+  "supabase": {
+    "mode": "auto",
+    "create_project_if_possible": true,
+    "use_existing_project_if_configured": true,
+    "fallback_to_local": true,
+    "apply_schema": true,
+    "apply_seed": true,
+    "apply_rls": true,
+    "apply_storage": true
+  },
+  "frontend": {
+    "framework": "nextjs",
+    "package_manager": "npm",
+    "port": 3000,
+    "run_smoke_test": true
+  },
+  "pipeline": {
+    "config": "config/atlas_config_producao.json",
+    "tag": "PRODUCAO",
+    "write_db": true,
+    "load_latest_round": true
+  },
+  "admin": {
+    "email": "admin@empresa.com",
+    "role": "Administrador",
+    "create_if_missing": true
+  },
+  "scheduler": {
+    "enabled": true,
+    "day": "MON",
+    "time": "08:00",
+    "mode": "windows_task_scheduler"
+  },
+  "local": {
+    "sqlite_path": "_localtest/atlas_local.sqlite"
+  }
+}
